@@ -94,3 +94,28 @@ document.addEventListener("keydown", e => {
 newGameBtn.addEventListener("click", createGrid);
 
 createGrid();
+touch.clientX
+touch.clientY
+
+let touchStartX = 0;
+let touchStartY = 0;
+
+container.addEventListener("touchstart", e => {
+  const touch = e.touches[0];
+  touchStartX = touch.clientX;
+  touchStartY = touch.clientY;
+});
+
+container.addEventListener("touchend", e => {
+  const touch = e.changedTouches[0];
+  const dx = touch.clientX - touchStartX;
+  const dy = touch.clientY - touchStartY;
+
+  if (Math.abs(dx) > Math.abs(dy)) {
+    if (dx > 30) move("ArrowRight");
+    else if (dx < -30) move("ArrowLeft");
+  } else {
+    if (dy > 30) move("ArrowDown");
+    else if (dy < -30) move("ArrowUp");
+  }
+});
